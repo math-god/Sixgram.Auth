@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sixgram.Auth.Api", "Sixgram.Auth.Api\Sixgram.Auth.Api.csproj", "{23453EE6-470F-4365-BC31-02F691D7757F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sixgram.Auth.Core", "Sixgram.Auth.Core\Sixgram.Auth.Core.csproj", "{FD07B5F8-4717-4151-9F0C-1D679AFBCA28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sixgram.Auth.Database", "Sixgram.Auth.Database\Sixgram.Auth.Database.csproj", "{7834EDF1-42E2-4F37-A3B8-ED1068D0149A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sixgram.Auth.Common", "Sixgram.Auth.Common\Sixgram.Auth.Common.csproj", "{58F98484-1AD0-44C6-8FAC-5B0675207E84}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{23453EE6-470F-4365-BC31-02F691D7757F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23453EE6-470F-4365-BC31-02F691D7757F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23453EE6-470F-4365-BC31-02F691D7757F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23453EE6-470F-4365-BC31-02F691D7757F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD07B5F8-4717-4151-9F0C-1D679AFBCA28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD07B5F8-4717-4151-9F0C-1D679AFBCA28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD07B5F8-4717-4151-9F0C-1D679AFBCA28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD07B5F8-4717-4151-9F0C-1D679AFBCA28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7834EDF1-42E2-4F37-A3B8-ED1068D0149A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7834EDF1-42E2-4F37-A3B8-ED1068D0149A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7834EDF1-42E2-4F37-A3B8-ED1068D0149A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7834EDF1-42E2-4F37-A3B8-ED1068D0149A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58F98484-1AD0-44C6-8FAC-5B0675207E84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58F98484-1AD0-44C6-8FAC-5B0675207E84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58F98484-1AD0-44C6-8FAC-5B0675207E84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58F98484-1AD0-44C6-8FAC-5B0675207E84}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
