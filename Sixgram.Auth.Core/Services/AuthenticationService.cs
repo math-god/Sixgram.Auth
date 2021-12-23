@@ -61,7 +61,7 @@ namespace Sixgram.Auth.Core.Services
                 result.ErrorType = ErrorType.BadRequest;
                 return result;
             }
-    
+
             var userDto = _mapper.Map<UserModelDto>(user);
 
             result = _mapper.Map<ResultContainer<UserLoginResponseDto>>(user);
@@ -86,18 +86,21 @@ namespace Sixgram.Auth.Core.Services
                 result.ErrorType = ErrorType.BadRequest;
                 return result;
             }
-
-            var userDto = _mapper.Map<UserModelDto>(data);
+            
             user = _mapper.Map<UserModel>(data);
+            user.Id = new Guid();
             user.Password = _passwordHasher.HashPassword(data.Password);
             user.DateCreated = DateTime.Now;
             user.Role = UserRoles.User;
 
             result = _mapper.Map<ResultContainer<UserRegisterResponseDto>>(await _userRepository.Create(user));
+            
+            var userDto = _mapper.Map<UserModelDto>(user);
+            
             result.Data.Token = CreateToken(userDto);
-            
-            await _httpService.CreateSubscriptionEntity(result.Data.Token.Token);
-            
+
+            /*await _httpService.CreateSubscriptionEntity(result.Data.Token.Token);*/
+
             return result;
         }
 

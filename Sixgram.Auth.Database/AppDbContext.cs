@@ -8,7 +8,10 @@ namespace Sixgram.Auth.Database
         public DbSet<UserModel> Users { get; set; }
         public DbSet<RestoringCodeModel> RestoringCodes { get; set; }
 
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) {}
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        {
+            Database.EnsureCreated();
+        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
