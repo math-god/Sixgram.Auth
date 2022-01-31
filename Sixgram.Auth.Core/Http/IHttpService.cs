@@ -4,6 +4,6 @@ namespace Sixgram.Auth.Core.Http
 {
     public interface IHttpService
     {
-        public Task CreateSubscriptionEntity(string json);
+        public Task CreateMember(string json);
     }
 }

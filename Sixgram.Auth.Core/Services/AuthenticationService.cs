@@ -99,7 +99,7 @@ namespace Sixgram.Auth.Core.Services
             
             result.Data.Token = CreateToken(userDto);
 
-            /*await _httpService.CreateSubscriptionEntity(result.Data.Token.Token);*/
+            await _httpService.CreateMember(result.Data.Token.Token);
 
             return result;
         }

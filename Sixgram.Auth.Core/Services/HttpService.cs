@@ -14,16 +14,18 @@ namespace Sixgram.Auth.Core.Services
 
         public HttpService(IHttpClientFactory httpClientFactory)
         {
+
             _httpClient = httpClientFactory.CreateClient("posts");
+            
         }
 
-        public async Task CreateSubscriptionEntity(string token)
+        public async Task CreateMember(string token)
         {
-            var httpContent = new StringContent(token, Encoding.UTF32, "application/jwt");
+            var httpContent = new StringContent("");
 
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             using var httpResponse =
-                await _httpClient.PostAsync("/api/Subscribe/CreateSubscriptionEntity", httpContent);
-            
+                await _httpClient.PostAsync("/api/Membership/CreateMember", httpContent);
             
             Console.WriteLine(httpResponse.StatusCode);
         }
