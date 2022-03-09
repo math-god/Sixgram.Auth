@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Sixgram.Auth.Common.Error;
 using Sixgram.Auth.Common.Result;
+using Sixgram.Auth.Core.Dto.File;
 using Sixgram.Auth.Core.Dto.User;
 using Sixgram.Auth.Core.Dto.User.Update;
 using Sixgram.Auth.Core.User;
@@ -23,6 +24,13 @@ namespace Sixgram.Auth.Core.Services
         {
             _userRepository = userRepository;
             _mapper = mapper;
+        }
+
+
+        public Task<ResultContainer<UserChangeAvatarResponseDto>> ChangeAvatar(
+            FileSendingDto changeAvatarRequestDto)
+        {
+            
         }
 
         public async Task<ResultContainer<UserUpdateResponseDto>> Edit(UserUpdateRequestDto data)

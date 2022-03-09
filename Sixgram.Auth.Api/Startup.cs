@@ -71,7 +71,6 @@ namespace Sixgram.Auth.Api
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IRestorePasswordService, RestorePasswordService>();
             services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IHttpService, HttpService>();
 
             var connection = Configuration.GetConnectionString("DefaultConnection");
             //services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase(connection));

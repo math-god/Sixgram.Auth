@@ -10,8 +10,8 @@ using Sixgram.Auth.Database;
 namespace Sixgram.Auth.Database.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211129091809_Init")]
-    partial class Init
+    [Migration("20220309100607_AddedAvatarMigration")]
+    partial class AddedAvatarMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -62,6 +62,9 @@ namespace Sixgram.Auth.Database.Migrations
 
                     b.Property<int>("Age")
                         .HasColumnType("integer");
+
+                    b.Property<Guid>("AvatarId")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("timestamp without time zone");

@@ -11,7 +11,6 @@ using Sixgram.Auth.Core.Dto.Authentication.Register;
 using Sixgram.Auth.Core.Dto.Token;
 using Sixgram.Auth.Core.Dto.User;
 using Sixgram.Auth.Core.Hashing;
-using Sixgram.Auth.Core.Http;
 using Sixgram.Auth.Core.Token;
 using Sixgram.Auth.Core.Validating;
 using Sixgram.Auth.Database.Models;
@@ -25,22 +24,19 @@ namespace Sixgram.Auth.Core.Services
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
         private readonly IPasswordHasher _passwordHasher;
-        private readonly IHttpService _httpService;
 
         public AuthenticationService
         (
             ITokenService tokenService,
             IMapper mapper,
             IUserRepository userRepository,
-            IPasswordHasher passwordHasher,
-            IHttpService httpService
+            IPasswordHasher passwordHasher
         )
         {
             _tokenService = tokenService;
             _mapper = mapper;
             _userRepository = userRepository;
             _passwordHasher = passwordHasher;
-            _httpService = httpService;
         }
 
         public async Task<ResultContainer<UserLoginResponseDto>> Login(UserLoginRequestDto data)
@@ -98,8 +94,6 @@ namespace Sixgram.Auth.Core.Services
             var userDto = _mapper.Map<UserModelDto>(user);
             
             result.Data.Token = CreateToken(userDto);
-
-            await _httpService.CreateMember(result.Data.Token.Token);
 
             return result;
         }
