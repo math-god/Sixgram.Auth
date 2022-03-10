@@ -24,6 +24,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Sixgram.Auth.Core.Authentication.RestoringPassword;
+using Sixgram.Auth.Core.File;
 using Sixgram.Auth.Core.Http;
 using Sixgram.Auth.Core.Options;
 using Sixgram.Auth.Core.User;
@@ -71,6 +72,9 @@ namespace Sixgram.Auth.Api
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IRestorePasswordService, RestorePasswordService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserIdentityService, UserIdentityService>();
+            services.AddScoped<IFileService, AvatarService>();
+            services.AddScoped<IFileHttpService, FileHttpService>();
 
             var connection = Configuration.GetConnectionString("DefaultConnection");
             //services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase(connection));
@@ -86,9 +90,9 @@ namespace Sixgram.Auth.Api
             services.AddControllers();
 
             //Configure HttpClient
-            services.AddHttpClient("posts", p =>
+            services.AddHttpClient("file_storage", p =>
             {
-                p.BaseAddress = new Uri("http://localhost:5184/");
+                p.BaseAddress = new Uri("http://localhost:5000");
             });
         }
 

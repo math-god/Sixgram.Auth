@@ -14,7 +14,7 @@ namespace Sixgram.Auth.Database.Models
         public string Email { get; set; }
         public string Password { get; set; }
         public string UserName { get; set; }
-        public Guid AvatarId { get; set; }
+        public Guid? AvatarId { get; set; }
 
         public UserRoles Role { get; set; }
     }

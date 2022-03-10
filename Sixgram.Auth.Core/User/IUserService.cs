@@ -10,7 +10,7 @@ namespace Sixgram.Auth.Core.User
     public interface IUserService
     {
         Task<ResultContainer<UserChangeAvatarResponseDto>> ChangeAvatar(
-            FileSendingDto changeAvatarRequestDto);
+            UserChangeAvatarRequestDto userChangeAvatarRequestDto);
         Task<ResultContainer<UserUpdateResponseDto>> Edit(UserUpdateRequestDto data);
         Task<ResultContainer<UserModelResponseDto>> GetByUserName(string name);
         Task<ResultContainer<UserModelResponseDto>> GetById(Guid id);
