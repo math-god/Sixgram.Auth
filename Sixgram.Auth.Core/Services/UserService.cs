@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Sixgram.Auth.Common.Error;
@@ -111,6 +112,23 @@ namespace Sixgram.Auth.Core.Services
             }
 
             result = _mapper.Map<ResultContainer<UserModelResponseDto>>(user);
+            return result;
+        }
+
+        public async Task<ResultContainer<UserListDto>> GetUsersIdByUserName(string userName)
+        {
+            var result = new ResultContainer<UserListDto>();
+
+            var usersId = _userRepository.GetRange(u => u.UserName.Contains(userName)).ToList();
+
+            if (usersId.Count == 0)
+            {
+                result.ErrorType = ErrorType.NotFound;
+                return result;
+            }
+
+            result = _mapper.Map<ResultContainer<UserListDto>>(usersId);
+
             return result;
         }
     }

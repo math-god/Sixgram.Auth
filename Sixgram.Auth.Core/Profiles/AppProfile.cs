@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using AutoMapper;
 using Sixgram.Auth.Common.Result;
 using Sixgram.Auth.Core.Dto.Authentication.Login;
 using Sixgram.Auth.Core.Dto.Authentication.Register;
@@ -30,6 +31,14 @@ namespace Sixgram.Auth.Core.Profiles
             CreateMap<UserModel, ResultContainer<UserModelResponseDto>>()
                 .ForMember("Data", opt =>
                     opt.MapFrom(u => u));
+            
+            CreateMap<List<UserModel>, ResultContainer<UserListDto>>()
+                .ForMember("Data", opt =>
+                    opt.MapFrom(u => u));
+            CreateMap<List<UserModel>, UserListDto>()
+                .ForMember("UsersId", opt =>
+                    opt.MapFrom(u => u.GetEnumerator().Current.Id));
+            
             CreateMap<UserModel, ResultContainer<UserUpdateResponseDto>>()
                 .ForMember("Data", opt =>
                     opt.MapFrom(u => u));

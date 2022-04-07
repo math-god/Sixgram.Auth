@@ -9,11 +9,11 @@ namespace Sixgram.Auth.Core.User
 {
     public interface IUserService
     {
-        Task<ResultContainer<UserChangeAvatarResponseDto>> ChangeAvatar(
-            UserChangeAvatarRequestDto userChangeAvatarRequestDto);
+        Task<ResultContainer<UserChangeAvatarResponseDto>> ChangeAvatar(UserChangeAvatarRequestDto data);
         Task<ResultContainer<UserUpdateResponseDto>> Edit(UserUpdateRequestDto data);
-        Task<ResultContainer<UserModelResponseDto>> GetByUserName(string name);
+        Task<ResultContainer<UserModelResponseDto>> GetByUserName(string userName);
         Task<ResultContainer<UserModelResponseDto>> GetById(Guid id);
         Task<ResultContainer<UserModelResponseDto>> Delete(Guid id);
+        Task<ResultContainer<UserListDto>> GetUsersIdByUserName(string userName);
     }
 }
