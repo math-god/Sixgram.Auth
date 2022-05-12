@@ -5,6 +5,7 @@ using Sixgram.Auth.Common.Error;
 using Sixgram.Auth.Common.Result;
 using Sixgram.Auth.Core.Dto.User;
 using Sixgram.Auth.Core.Dto.User.Update;
+using Sixgram.Auth.Core.File;
 using Sixgram.Auth.Core.User;
 using Sixgram.Auth.Database.Repository.User;
 
@@ -14,15 +15,52 @@ namespace Sixgram.Auth.Core.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
+        private readonly IUserIdentityService _userIdentityService;
+        private readonly IFileService _fileService;
 
         public UserService
         (
             IUserRepository userRepository,
-            IMapper mapper
+            IMapper mapper,
+            IUserIdentityService userIdentityService,
+            IFileService fileService
         )
         {
             _userRepository = userRepository;
             _mapper = mapper;
+            _userIdentityService = userIdentityService;
+            _fileService = fileService;
+        }
+
+
+        public async Task<ResultContainer<UserChangeAvatarResponseDto>> ChangeAvatar(
+            UserChangeAvatarRequestDto data)
+        {
+            var result = new ResultContainer<UserChangeAvatarResponseDto>();
+
+            if (data.File == null)
+            {
+                result.ErrorType = ErrorType.BadRequest;
+                return result;
+            }
+
+            var userId = _userIdentityService.GetCurrentUserId();
+
+            var avatarId = await _fileService.Send(data.File, userId);
+
+            if (avatarId == null)
+            {
+                result.ErrorType = ErrorType.BadRequest;
+                return result;
+            }
+
+            var user = await _userRepository.GetById(userId);
+
+            user.AvatarId = avatarId;
+
+            result = _mapper.Map<ResultContainer<UserChangeAvatarResponseDto>>(await _userRepository.Update(user));
+
+            return result;
         }
 
         public async Task<ResultContainer<UserUpdateResponseDto>> Edit(UserUpdateRequestDto data)

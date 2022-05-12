@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
-using Sixgram.Auth.Common.Roles;
 using Sixgram.Auth.Core.Dto.User;
 using Sixgram.Auth.Core.Options;
 using Sixgram.Auth.Core.Token;
@@ -14,13 +14,16 @@ namespace Sixgram.Auth.Core.Services
     public class TokenService : ITokenService
     {
         private readonly string _secretKey;
+        private readonly HttpContext _httpContext;
 
         public TokenService
         (
-            AppOptions appOptions
+            AppOptions appOptions,
+            IHttpContextAccessor httpContextAccessor
         )
         {
             _secretKey = appOptions.SecretKey;
+            _httpContext = httpContextAccessor.HttpContext;
         }
 
         public TokenModel CreateToken(UserModelDto user)
@@ -59,5 +62,10 @@ namespace Sixgram.Auth.Core.Services
 
             return claims;
         }
+        
+        public Guid GetCurrentUserId() =>
+            Guid.TryParse(_httpContext.User.FindFirstValue(ClaimTypes.NameIdentifier), out var userId)
+                ? userId
+                : new Guid();
     }
 }

@@ -25,7 +25,21 @@ namespace Sixgram.Auth.Api.Controllers
         {
             _userService = userService;
         }
-        
+
+        /// <summary>
+        /// Change avatar
+        /// </summary>
+        /// <param name="data"></param>
+        /// <response code="200">Return avatar id</response>
+        /// <response code="400">There is no file in request or file storage returns response without file id</response>
+        [HttpPatch("[action]")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<UserChangeAvatarResponseDto>> ChangeAvatar(
+            [FromForm] UserChangeAvatarRequestDto data)
+            => await ReturnResult<ResultContainer<UserChangeAvatarResponseDto>, UserChangeAvatarResponseDto>
+                (_userService.ChangeAvatar(data));
+
         /// <summary>
         /// Edit user information
         /// </summary>
@@ -40,7 +54,7 @@ namespace Sixgram.Auth.Api.Controllers
         public async Task<ActionResult<UserUpdateResponseDto>> Edit(UserUpdateRequestDto user)
             => await ReturnResult<ResultContainer<UserUpdateResponseDto>, UserUpdateResponseDto>
                 (_userService.Edit(user));
-        
+
         /// <summary>
         /// Get user by Id
         /// </summary>
@@ -66,7 +80,7 @@ namespace Sixgram.Auth.Api.Controllers
         public async Task<ActionResult<UserModelResponseDto>> GetByUserName(string name)
             => await ReturnResult<ResultContainer<UserModelResponseDto>, UserModelResponseDto>
                 (_userService.GetByUserName(name));
-        
+
         /// <summary>
         /// Delete user
         /// </summary>

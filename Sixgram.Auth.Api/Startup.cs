@@ -24,6 +24,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Sixgram.Auth.Core.Authentication.RestoringPassword;
+using Sixgram.Auth.Core.File;
 using Sixgram.Auth.Core.Http;
 using Sixgram.Auth.Core.Options;
 using Sixgram.Auth.Core.User;
@@ -71,7 +72,9 @@ namespace Sixgram.Auth.Api
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IRestorePasswordService, RestorePasswordService>();
             services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IHttpService, HttpService>();
+            services.AddScoped<IUserIdentityService, UserIdentityService>();
+            services.AddScoped<IFileService, AvatarService>();
+            services.AddScoped<IFileHttpService, FileHttpService>();
 
             var connection = Configuration.GetConnectionString("DefaultConnection");
             //services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase(connection));
@@ -87,10 +90,9 @@ namespace Sixgram.Auth.Api
             services.AddControllers();
 
             //Configure HttpClient
-            services.AddHttpClient("posts", p =>
-            {
-                p.BaseAddress = new Uri("http://localhost:5184/");
-            });
+            services.AddHttpClient("file_storage", p => { p.BaseAddress = new Uri("http://localhost:5000"); });
+
+            services.AddCors();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
@@ -110,8 +112,13 @@ namespace Sixgram.Auth.Api
                         }
                     });
             }
-            
+
             app.UseRouting();
+
+            app.UseCors(b => b.WithOrigins("http://10.254.7.74:3000", "http://10.254.7.20:3000")
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
 
             app.UseAuthentication();
             app.UseAuthorization();

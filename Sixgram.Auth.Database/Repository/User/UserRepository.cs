@@ -1,4 +1,6 @@
-﻿using Sixgram.Auth.Database.Models;
+﻿using System;
+using System.Threading.Tasks;
+using Sixgram.Auth.Database.Models;
 using Sixgram.Auth.Database.Repository.Base;
 
 namespace Sixgram.Auth.Database.Repository.User

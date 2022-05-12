@@ -61,6 +61,9 @@ namespace Sixgram.Auth.Database.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("integer");
 
+                    b.Property<Guid?>("AvatarId")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("timestamp without time zone");
 
