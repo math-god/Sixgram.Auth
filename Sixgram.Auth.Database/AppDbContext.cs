@@ -19,9 +19,6 @@ namespace Sixgram.Auth.Database
 
             builder.Entity<UserModel>(user =>
             {
-                user.Property(u => u.Firstname).IsRequired().HasMaxLength(50);
-                user.Property(u => u.Name).IsRequired().HasMaxLength(50);
-                user.Property(u => u.Firstname).HasMaxLength(30);
                 user.Property(u => u.Age).IsRequired();
                 user.Property(u => u.Email).IsRequired().HasMaxLength(50);
                 user.Property(u => u.Password).IsRequired().HasMaxLength(100);

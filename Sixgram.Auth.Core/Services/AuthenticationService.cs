@@ -70,7 +70,7 @@ namespace Sixgram.Auth.Core.Services
         {
             var result = new ResultContainer<UserRegisterResponseDto>();
             var isEmailValid = EmailValidator.IsEmailValid(data.Email);
-            if (!isEmailValid || data.Firstname == null || data.Name == null || data.Age is <= 0 or > 120)
+            if (!isEmailValid || data.Age is <= 0 or > 120)
             {
                 result.ErrorType = ErrorType.BadRequest;
                 return result;
@@ -82,7 +82,7 @@ namespace Sixgram.Auth.Core.Services
                 result.ErrorType = ErrorType.BadRequest;
                 return result;
             }
-            
+
             user = _mapper.Map<UserModel>(data);
             user.Id = new Guid();
             user.Password = _passwordHasher.HashPassword(data.Password);
@@ -90,9 +90,9 @@ namespace Sixgram.Auth.Core.Services
             user.Role = UserRoles.User;
 
             result = _mapper.Map<ResultContainer<UserRegisterResponseDto>>(await _userRepository.Create(user));
-            
+
             var userDto = _mapper.Map<UserModelDto>(user);
-            
+
             result.Data.Token = CreateToken(userDto);
 
             return result;
