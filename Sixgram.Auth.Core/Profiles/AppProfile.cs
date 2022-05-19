@@ -4,10 +4,8 @@ using Sixgram.Auth.Core.Dto.Authentication.Login;
 using Sixgram.Auth.Core.Dto.Authentication.Register;
 using Sixgram.Auth.Core.Dto.Authentication.RestoringPassword.ForgotPassword;
 using Sixgram.Auth.Core.Dto.Authentication.RestoringPassword.RestorePassword;
-using Sixgram.Auth.Core.Dto.Token;
 using Sixgram.Auth.Core.Dto.User;
 using Sixgram.Auth.Core.Dto.User.Update;
-using Sixgram.Auth.Core.Token;
 using Sixgram.Auth.Database.Models;
 
 namespace Sixgram.Auth.Core.Profiles
@@ -39,7 +37,7 @@ namespace Sixgram.Auth.Core.Profiles
                     opt.MapFrom(u => u));
             CreateMap<UserModel, UserChangeAvatarResponseDto>();
 
-            CreateMap<TokenModel, TokenModelDto>();
+            /*CreateMap<TokenModel, TokenModelDto>();*/
 
             CreateMap<UserRegisterRequestDto, UserModel>();
             CreateMap<UserRegisterRequestDto, UserModelDto>();

@@ -8,7 +8,6 @@ using Sixgram.Auth.Core.Authentication;
 using Sixgram.Auth.Core.Dto.Authentication;
 using Sixgram.Auth.Core.Dto.Authentication.Login;
 using Sixgram.Auth.Core.Dto.Authentication.Register;
-using Sixgram.Auth.Core.Dto.Token;
 using Sixgram.Auth.Core.Dto.User;
 using Sixgram.Auth.Core.Hashing;
 using Sixgram.Auth.Core.Token;
@@ -61,7 +60,8 @@ namespace Sixgram.Auth.Core.Services
             var userDto = _mapper.Map<UserModelDto>(user);
 
             result = _mapper.Map<ResultContainer<UserLoginResponseDto>>(user);
-            result.Data.Token = CreateToken(userDto);
+            
+            result.Data.Token = CreateToken(userDto).Token;
 
             return result;
         }
@@ -93,14 +93,14 @@ namespace Sixgram.Auth.Core.Services
 
             var userDto = _mapper.Map<UserModelDto>(user);
 
-            result.Data.Token = CreateToken(userDto);
+            result.Data.Token = CreateToken(userDto).Token;
 
             return result;
         }
 
-        private TokenModelDto CreateToken(UserModelDto data)
+        private TokenModel CreateToken(UserModelDto data)
         {
-            var result = _mapper.Map<TokenModelDto>(_tokenService.CreateToken(data));
+            var result = _tokenService.CreateToken(data);
             return result;
         }
 
