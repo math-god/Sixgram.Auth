@@ -36,7 +36,7 @@ namespace Sixgram.Auth.Core.Services
         {
             var handler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_secretKey);
-            var tokenExpiration = DateTime.Now.AddDays(365);
+            var tokenExpiration = DateTime.Now.AddHours(1);
 
             var securityToken = new JwtSecurityToken
             (

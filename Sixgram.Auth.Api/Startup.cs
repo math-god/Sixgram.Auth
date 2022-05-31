@@ -115,8 +115,8 @@ namespace Sixgram.Auth.Api
 
             app.UseRouting();
 
-            app.UseCors(b => b.WithOrigins("http://10.254.7.74:3000", "http://10.254.7.20:3000")
-                .AllowAnyOrigin()
+            app.UseCors(b
+                => b.AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader());
 

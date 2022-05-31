@@ -14,6 +14,7 @@ namespace Sixgram.Auth.Core.User
         Task<ResultContainer<UserUpdateResponseDto>> Edit(UserUpdateRequestDto data);
         Task<ResultContainer<UserModelResponseDto>> GetByUserName(string name);
         Task<ResultContainer<UserModelResponseDto>> GetById(Guid id);
+        Task<ResultContainer<UserModelDto>> GetByToken(string token);
         Task<ResultContainer<UserModelResponseDto>> Delete(Guid id);
     }
 }

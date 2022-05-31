@@ -35,6 +35,11 @@ namespace Sixgram.Auth.Core.Profiles
             CreateMap<UserModel, ResultContainer<UserChangeAvatarResponseDto>>()
                 .ForMember("Data", opt =>
                     opt.MapFrom(u => u));
+            
+            CreateMap<UserModel, ResultContainer<UserModelDto>>()
+                .ForMember("Data", opt =>
+                    opt.MapFrom(u => u));
+            
             CreateMap<UserModel, UserChangeAvatarResponseDto>();
 
             /*CreateMap<TokenModel, TokenModelDto>();*/

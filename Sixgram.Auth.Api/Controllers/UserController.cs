@@ -91,5 +91,16 @@ namespace Sixgram.Auth.Api.Controllers
         public async Task<ActionResult<UserModelResponseDto>> Delete(Guid id)
             => await ReturnResult<ResultContainer<UserModelResponseDto>, UserModelResponseDto>
                 (_userService.Delete(id));
+
+        /// <summary>
+        /// Get user by Jwt
+        /// </summary>
+        /// <param name="token"></param>
+        /// <response code="200">Return user</response>
+        /// <response code="404">If user doesn't exist</response>
+        [HttpGet("{token:required}")]
+        public async Task<ActionResult<UserModelDto>> GetByToken(string token)
+            => await ReturnResult<ResultContainer<UserModelDto>, UserModelDto>
+                (_userService.GetByToken(token));
     }
 }

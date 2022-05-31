@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Sixgram.Auth.Common.Error;
@@ -97,6 +98,25 @@ namespace Sixgram.Auth.Core.Services
             }
 
             result = _mapper.Map<ResultContainer<UserModelResponseDto>>(user);
+            return result;
+        }
+
+        public async Task<ResultContainer<UserModelDto>> GetByToken(string token)
+        {
+            var result = new ResultContainer<UserModelDto>();
+
+            var userId = new Guid(_userIdentityService.GetClaim(token, ClaimTypes.NameIdentifier));
+
+            var user = await _userRepository.GetById(userId);
+
+            if (user == null)
+            {
+                result.ErrorType = ErrorType.NotFound;
+                return result;
+            }
+
+            result = _mapper.Map<ResultContainer<UserModelDto>>(user);
+
             return result;
         }
 
