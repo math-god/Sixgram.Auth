@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using AutoMapper;
 using Sixgram.Auth.Common.Result;
 using Sixgram.Auth.Core.Dto.Authentication.Login;
 using Sixgram.Auth.Core.Dto.Authentication.Register;
@@ -28,18 +29,31 @@ namespace Sixgram.Auth.Core.Profiles
             CreateMap<UserModel, ResultContainer<UserModelResponseDto>>()
                 .ForMember("Data", opt =>
                     opt.MapFrom(u => u));
+            CreateMap<UserModel, UserModelResponseDto>()
+                .ForMember("UserId", opt =>
+                    opt.MapFrom(u => u.Id));
             CreateMap<UserModel, ResultContainer<UserUpdateResponseDto>>()
                 .ForMember("Data", opt =>
                     opt.MapFrom(u => u));
-            
+
             CreateMap<UserModel, ResultContainer<UserChangeAvatarResponseDto>>()
                 .ForMember("Data", opt =>
                     opt.MapFrom(u => u));
-            
+
             CreateMap<UserModel, ResultContainer<UserModelDto>>()
                 .ForMember("Data", opt =>
                     opt.MapFrom(u => u));
-            
+
+            CreateMap<List<UserModel>, ResultContainer<UserModelsDto>>()
+                .ForMember("Data", opt
+                    => opt.MapFrom(p => p));
+
+            CreateMap<List<UserModel>, UserModelsDto>()
+                .ForMember("Users", opt
+                    => opt.MapFrom(p => p));
+
+            CreateMap<UserModel, UserModelDto>();
+
             CreateMap<UserModel, UserChangeAvatarResponseDto>();
 
             /*CreateMap<TokenModel, TokenModelDto>();*/
@@ -51,12 +65,11 @@ namespace Sixgram.Auth.Core.Profiles
             CreateMap<ForgotPasswordRequestDto, ResultContainer<ForgotPasswordResponseDto>>()
                 .ForMember("Data", opt =>
                     opt.MapFrom(f => f));
-            
+
             CreateMap<RestorePasswordRequestDto, RestorePasswordResponseDto>();
             CreateMap<RestorePasswordRequestDto, ResultContainer<RestorePasswordResponseDto>>()
                 .ForMember("Data", opt =>
                     opt.MapFrom(r => r));
-            
         }
     }
 }

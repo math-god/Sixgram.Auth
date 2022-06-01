@@ -74,12 +74,22 @@ namespace Sixgram.Auth.Api.Controllers
         /// <param name="name"></param>
         /// <response code="200">Return user</response>
         /// <response code="404">If user with UserName doesn't exist</response>
-        [HttpGet("{name}")]
+        [HttpGet("search/{name}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<UserModelResponseDto>> GetByUserName(string name)
+        public async Task<ActionResult<UserModelResponseDto>> FindUser(string name)
             => await ReturnResult<ResultContainer<UserModelResponseDto>, UserModelResponseDto>
                 (_userService.GetByUserName(name));
+
+        /// <summary>
+        /// Get users 
+        /// </summary>
+        /// <response code="200">Return users</response>
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<UserModelsDto>> GetUsers()
+            => await ReturnResult<ResultContainer<UserModelsDto>, UserModelsDto>
+                (_userService.GetUsers());
 
         /// <summary>
         /// Delete user
@@ -98,7 +108,7 @@ namespace Sixgram.Auth.Api.Controllers
         /// <param name="token"></param>
         /// <response code="200">Return user</response>
         /// <response code="404">If user doesn't exist</response>
-        [HttpGet("{token:required}")]
+        [HttpGet("{token}")]
         public async Task<ActionResult<UserModelDto>> GetByToken(string token)
             => await ReturnResult<ResultContainer<UserModelDto>, UserModelDto>
                 (_userService.GetByToken(token));

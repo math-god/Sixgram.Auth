@@ -1,7 +1,9 @@
-﻿namespace Sixgram.Auth.Core.Dto.User
+﻿using System;
+
+namespace Sixgram.Auth.Core.Dto.User
 {
     public class UserModelResponseDto
     {
-        public string UserName { get; set; }
+        public Guid UserId { get; set; }
     }
 }

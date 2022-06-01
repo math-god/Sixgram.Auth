@@ -77,6 +77,7 @@ namespace Sixgram.Auth.Core.Services
         {
             var result = new ResultContainer<UserModelResponseDto>();
             var user = _userRepository.GetOne(u => u.UserName == name);
+            
             if (user == null)
             {
                 result.ErrorType = ErrorType.NotFound;
@@ -98,6 +99,15 @@ namespace Sixgram.Auth.Core.Services
             }
 
             result = _mapper.Map<ResultContainer<UserModelResponseDto>>(user);
+            return result;
+        }
+
+        public async Task<ResultContainer<UserModelsDto>> GetUsers()
+        {
+            var users = _userRepository.GetMany();
+
+            var result = _mapper.Map<ResultContainer<UserModelsDto>>(users);
+
             return result;
         }
 

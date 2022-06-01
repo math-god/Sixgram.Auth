@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Sixgram.Auth.Common.Base;
@@ -16,11 +17,14 @@ namespace Sixgram.Auth.Database.Repository.Base
             Context = context;
         }
 
-        public TModel GetOne (Func<TModel, bool> predicate)
+        public TModel GetOne(Func<TModel, bool> predicate)
             => Context.Set<TModel>().AsNoTracking().FirstOrDefault(predicate);
-        
 
-        public async Task<TModel> Create (TModel item)
+        public List<TModel> GetMany()
+            => Context.Set<TModel>().AsNoTracking().ToList();
+
+
+        public async Task<TModel> Create(TModel item)
         {
             item.DateCreated = DateTime.Now;
             await Context.Set<TModel>().AddAsync(item);
@@ -28,17 +32,17 @@ namespace Sixgram.Auth.Database.Repository.Base
             return item;
         }
 
-        public async Task<TModel> Update (TModel item)
+        public async Task<TModel> Update(TModel item)
         {
             item.DateUpdated = DateTime.Now;
             Context.Set<TModel>().Update(item);
             await Context.SaveChangesAsync();
             return item;
         }
-        
+
         public async Task<TModel> GetById(Guid id)
             => await Context.Set<TModel>().FindAsync(id);
-        
+
 
         public async Task<TModel> Delete(Guid id)
         {
