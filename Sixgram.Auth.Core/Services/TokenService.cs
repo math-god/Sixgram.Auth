@@ -57,7 +57,6 @@ namespace Sixgram.Auth.Core.Services
             var claims = new List<Claim>
             {
                 new(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new(ClaimTypes.Email, user.Email),
             };
 
             return claims;
